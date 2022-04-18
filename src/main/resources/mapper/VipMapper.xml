@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gok.mapper.VipMapper">
+<!--    查-->
+<select id="list" resultType="cn.gok.entity.Vip">
+select * from vip where 1=1
+   <if test="searchKey !=null and searchKey !=''">
+     and `name` like CONCAT(CONCAT('%', #{searchKey}), '%')
+       or `identity` like CONCAT(CONCAT('%', #{searchKey}), '%')
+       or `sex` like CONCAT(CONCAT('%', #{searchKey}), '%')
+       or tel like CONCAT(CONCAT('%', #{searchKey}), '%')
+       or address like CONCAT(CONCAT('%', #{searchKey}), '%')
+       or age like CONCAT(CONCAT('%', #{searchKey}), '%')
+   </if>
+</select>
+<!--    增-->
+    <insert id="save">
+     insert into vip  (`name`,sex,tel,address,age,`identity`)
+          values (#{name},#{sex},#{tel},#{address},#{age},#{identity})
+    </insert>
+    <!--    查找是否相同-->
+    <select id="findloophole" resultType="cn.gok.entity.Vip">
+        select *
+        from vip
+        where tel= #{tel}
+    </select>
+<!--    改-->
+    <update id="update">
+update vip set
+            `name`=#{name},sex=#{sex},tel=#{tel},address=#{address},age=#{age},`identity`=#{identity}
+            where
+            id=#{id}
+    </update>
+<!--    删-->
+    <delete id="delete">
+delete from vip where id=#{id}
+    </delete>
+<!--    详情-->
+    <select id="detail" resultType="cn.gok.entity.Vip">
+select * from vip where id=#{id}
+    </select>
+<!--    导入导出-->
+    <select id="getvips" resultType="cn.gok.entity.Vip">
+select * from vip
+    </select>
+    <select id="findById" resultType="cn.gok.entity.Vip">
+select * from vip where id=#{id}
+    </select>
+    <!--    查找是否相同-->
+    <select id="findVipByName" resultType="cn.gok.entity.Vip">
+        select *
+        from vip
+        where `name` = #{name}
+    </select>
+
+
+</mapper>

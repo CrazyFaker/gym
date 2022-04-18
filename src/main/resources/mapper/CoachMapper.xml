@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gok.mapper.CoachMapper">
+<!--    查-->
+<select id="list" resultType="cn.gok.entity.Coach">
+select * from coach where 1=1
+   <if test="searchKey !=null and searchKey !=''">
+     and `name` like CONCAT(CONCAT('%', #{searchKey}), '%')
+       or age like CONCAT(CONCAT('%', #{searchKey}), '%')
+       or id like CONCAT(CONCAT('%', #{searchKey}), '%')
+       or tel like CONCAT(CONCAT('%', #{searchKey}), '%')
+       or sex like CONCAT(CONCAT('%', #{searchKey}), '%')
+   </if>
+</select>
+<!--    增-->
+    <insert id="save">
+     insert into coach  (`name`,tel,sex,`describe`,picture,age)
+          values (#{name},#{tel},#{sex},#{describe},#{picture},#{age})
+    </insert>
+
+<!--    改-->
+    <update id="update">
+update coach set
+            `name`=#{name},tel=#{tel},sex=#{sex},`describe`=#{describe},picture=#{picture},age=#{age}
+            where
+            id=#{id}
+    </update>
+<!--    删-->
+    <delete id="delete">
+delete from coach where id=#{id}
+    </delete>
+
+<!--    导入导出-->
+    <select id="findById" resultType="cn.gok.entity.Coach">
+select * from coach where id=#{id}
+    </select>
+    <select id="getcoachs" resultType="cn.gok.entity.Coach">
+        select * from coach
+    </select>
+
+
+
+
+
+
+
+
+</mapper>

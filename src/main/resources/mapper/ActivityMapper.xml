@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gok.mapper.ActivityMapper">
+<!--    查-->
+<select id="list" resultType="cn.gok.entity.Activity">
+select * from activity where 1=1
+   <if test="searchKey !=null and searchKey !=''">
+     and activityName like CONCAT(CONCAT('%', #{searchKey}), '%')
+       or endTime like CONCAT(CONCAT('%', #{searchKey}), '%')
+       or startTime like CONCAT(CONCAT('%', #{searchKey}), '%')
+       or coachId like CONCAT(CONCAT('%', #{searchKey}), '%')
+       or coachName like CONCAT(CONCAT('%', #{searchKey}), '%')
+   </if>
+</select>
+<!--    增-->
+    <insert id="save">
+     insert into activity(activityName,`number`,price,startTime,endTime,coachId,coachName)
+          values (#{activityName},#{number},#{price},#{startTime},#{endTime},(select id from coach where `name`=#{coachName}),#{coachName})
+    </insert>
+
+<!--    改-->
+    <update id="update">
+update activity set
+            activityName=#{activityName},`number`=#{number},price=#{price},startTime=#{startTime},endTime=#{endTime},coachId=#{coachId},coachName=#{coachName}
+            where
+            id=#{id}
+    </update>
+<!--    更改教练-->
+    <update id="updateCoach">
+        update activity set coachName=#{coachName},coachId=(select id from coach where `name`=#{coachName}) WHERE id=#{id}
+    </update>
+<!--    删-->
+    <delete id="delete">
+delete from activity where id=#{id}
+    </delete>
+
+<!--    导入导出-->
+    <select id="findById" resultType="cn.gok.entity.Coach">
+select * from activity where id=#{id}
+    </select>
+
+
+
+
+
+
+
+</mapper>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gok.mapper.ConsumeMapper">
+    <select id="list" resultType="cn.gok.entity.Consume">
+        select * from consume where status = 1
+        <if test="searchKey!=null and searchKey!=''">
+            and vname like CONCAT(CONCAT('%', #{searchKey}), '%')
+            or vip like CONCAT(CONCAT('%', #{searchKey}), '%')
+            or name like CONCAT(CONCAT('%', #{searchKey}), '%')
+        </if>
+    </select>
+
+    <!--   新增 -->
+    <insert id="save">
+        insert into consume (name,price,number,status,vip,vname)
+        <if test="name!=null">
+            values (#{name},#{price},#{number},'1',(select id from vip where `name`=#{vname}),#{vname})
+        </if>
+    </insert>
+
+
+    <!--  删除  -->
+    <update id="delete">
+       update consume set
+        <if test="id!=null">
+            status = 0
+            where id = #{id}
+        </if>
+    </update>
+
+    <!--    导入导出-->
+    <select id="getconsumes" resultType="cn.gok.entity.Consume">
+        select * from consume
+    </select>
+
+</mapper>
