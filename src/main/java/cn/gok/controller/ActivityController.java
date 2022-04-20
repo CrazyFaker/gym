@@ -8,10 +8,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.text.ParseException;
 
 @CrossOrigin
 @Controller
@@ -22,7 +21,7 @@ public class ActivityController {
 
     @RequestMapping("/list")
     @ResponseBody
-    public Result list(@RequestBody JSONObject json) {
+    public Result list(@RequestBody JSONObject json) throws ParseException {
         String searchKey = json.getString("searchKey");
         //给他默认的页码以及默认的每页的数目
         Integer pageNum = json.getInteger("pageNum") == null ? 1 : json.getInteger("pageNum");
@@ -81,10 +80,10 @@ public class ActivityController {
 
     @RequestMapping("/del")
     @ResponseBody
-    public Result delete(@RequestBody Activity activity) {
+    public Result delete(@RequestParam Long id) {
         Result result=null;
 
-        int check = activityService.delete(activity);
+        int check = activityService.delete(id);
         if(check>0){
             result=Result.success(null);
         }else {

@@ -1,8 +1,7 @@
 package cn.gok.service.impl;
 
-import cn.gok.entity.Coach;
-
 import cn.gok.entity.Order;
+import cn.gok.mapper.ActivityMapper;
 import cn.gok.mapper.OrderMapper;
 import cn.gok.service.OrderService;
 import com.github.pagehelper.PageHelper;
@@ -16,6 +15,8 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
     @Autowired(required = false)
     private OrderMapper orderMapper;
+    @Autowired(required = false)
+    private ActivityMapper activityMapper;
     @Override
     public PageInfo<Order> list(String searchKey, Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum,pageSize);
@@ -26,8 +27,12 @@ public class OrderServiceImpl implements OrderService {
 
 
     @Override
-    public int save(Order order) {
+    public int save(Order order,Long id) {
 
+        String status = activityMapper.listExpire(id);
+        if(status.equals(0)){
+            return 0;
+        }
         return orderMapper.save(order);
     }
 

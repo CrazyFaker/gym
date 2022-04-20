@@ -5,25 +5,26 @@
 <mapper namespace="cn.gok.mapper.ActivityMapper">
 <!--    查-->
 <select id="list" resultType="cn.gok.entity.Activity">
-select * from activity where 1=1
+select * from activity where is_Delete = 1
    <if test="searchKey !=null and searchKey !=''">
      and activityName like CONCAT(CONCAT('%', #{searchKey}), '%')
        or endTime like CONCAT(CONCAT('%', #{searchKey}), '%')
        or startTime like CONCAT(CONCAT('%', #{searchKey}), '%')
        or coachId like CONCAT(CONCAT('%', #{searchKey}), '%')
        or coachName like CONCAT(CONCAT('%', #{searchKey}), '%')
+       or type like CONCAT(CONCAT('%', #{searchKey}), '%')
    </if>
 </select>
 <!--    增-->
     <insert id="save">
-     insert into activity(activityName,`number`,price,startTime,endTime,coachId,coachName)
-          values (#{activityName},#{number},#{price},#{startTime},#{endTime},(select id from coach where `name`=#{coachName}),#{coachName})
+     insert into activity(activityName,`number`,type,introduction,price,startTime,endTime,coachId,coachName,is_Delete)
+          values (#{activityName},#{number},#{type},#{introduction},#{price},#{startTime},#{endTime},(select id from coach where `name`=#{coachName}),#{coachName},'1')
     </insert>
 
 <!--    改-->
     <update id="update">
 update activity set
-            activityName=#{activityName},`number`=#{number},price=#{price},startTime=#{startTime},endTime=#{endTime},coachId=#{coachId},coachName=#{coachName}
+            activityName=#{activityName},`number`=#{number},type=#{type}introduction=#{introduction},price=#{price},startTime=#{startTime},endTime=#{endTime},coachId=#{coachId},coachName=#{coachName}
             where
             id=#{id}
     </update>
@@ -33,14 +34,18 @@ update activity set
     </update>
 <!--    删-->
     <delete id="delete">
-delete from activity where id=#{id}
+        update activity set
+        <if test="id!=null">
+            is_Delete = 0
+            where id = #{id}
+        </if>
     </delete>
 
-<!--    导入导出-->
-    <select id="findById" resultType="cn.gok.entity.Coach">
-select * from activity where id=#{id}
-    </select>
 
+<!--    查询活动是否过期-->
+    <select id="listExpire">
+        select is_Delete from activity where id=#{id}
+    </select>
 
 
 

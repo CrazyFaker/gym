@@ -16,5 +16,7 @@ public class Activity {
     private String endTime;
     private Integer coachId;
     private String coachName;
-
+    private String is_Delete;
+    private String introduction;
+    private String type;
 }

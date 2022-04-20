@@ -19,5 +19,8 @@ public interface ActivityMapper {
     public int updateCoach(Activity activity);
 
     //删除
-    public int delete(Activity activity);
+    public int delete(Long id);
+
+    //查询是否过期
+    public String listExpire(Long id);
 }

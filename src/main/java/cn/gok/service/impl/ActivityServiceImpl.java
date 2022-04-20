@@ -8,6 +8,9 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -15,9 +18,18 @@ public class ActivityServiceImpl implements ActivityService {
     @Autowired(required = false)
     private ActivityMapper activityMapper;
     @Override
-    public PageInfo<Activity> list(String searchKey, Integer pageNum, Integer pageSize) {
+    public PageInfo<Activity> list(String searchKey, Integer pageNum, Integer pageSize) throws ParseException {
         PageHelper.startPage(pageNum,pageSize);
         List<Activity> list=activityMapper.list(searchKey);
+        for( int i = 0; i < list.size() ; i++){
+            String endTime=dateToStamp(list.get(i).getEndTime());
+            String currentTime = String.valueOf(System.currentTimeMillis());
+            int res = endTime.compareTo(currentTime);
+            if(res < 0){
+                activityMapper.delete(list.get(i).getId());
+            }
+        }
+        list=activityMapper.list(searchKey);
         PageInfo<Activity> pageInfo=new PageInfo<>(list);
         return pageInfo;
     }
@@ -44,8 +56,24 @@ public class ActivityServiceImpl implements ActivityService {
 
 
     @Override
-    public int delete(Activity activity) {
+    public int delete(Long id) {
 
-        return  activityMapper.delete(activity);
+        return  activityMapper.delete(id);
+    }
+
+    /**
+     * 时间转换成时间戳,参数和返回值都是字符串
+     * @param  s
+     * @return res
+     * @throws ParseException
+     */
+    public static String dateToStamp(String s) throws ParseException {
+        String res;
+        //设置时间模版
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = simpleDateFormat.parse(s);
+        long ts = date.getTime();
+        res = String.valueOf(ts);
+        return res;
     }
 }

@@ -8,10 +8,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
 @Controller
@@ -35,11 +32,10 @@ public class OrderController {
 
     @RequestMapping("/add")
     @ResponseBody
-    public Result save(@RequestBody Order order) {
+    public Result save(@RequestBody Order order, @RequestParam Long id) {
         Result result = null;
 
-
-            int check = orderService.save(order);
+            int check = orderService.save(order,id);
             if (check > 0) {
                 result = Result.success(null);
             } else {
