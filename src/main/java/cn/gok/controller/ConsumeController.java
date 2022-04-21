@@ -36,6 +36,13 @@ public class ConsumeController {
         return Result.success(list);
     }
 
+    @RequestMapping("/listVip")
+    @ResponseBody
+    public Result listVip(@RequestParam Long vid) {
+        List<Consume> check = consumeService.listVip(vid);
+        return Result.success(check);
+    }
+
     @RequestMapping("/add")
     @ResponseBody
     public Result save(@RequestBody Consume consume) {

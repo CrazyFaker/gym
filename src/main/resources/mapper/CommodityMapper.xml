@@ -14,9 +14,9 @@
 
     <!--   新增 -->
     <insert id="save">
-        insert into commodity (cname,price,number,discount,sketch)
+        insert into commodity (cname,image,price,number,discount,sketch)
         <if test="cname!=null">
-        values (#{cname},#{price},#{number},#{discount},#{sketch})
+        values (#{cname},#{image},#{price},#{number},#{discount},#{sketch})
         </if>
     </insert>
 
@@ -24,10 +24,18 @@
     <update id="update">
         update commodity set
         <if test="cname!=null">
-         cname=#{cname},price=#{price},discount=#{discount},sketch=#{sketch}
+         cname=#{cname},image=#{image},price=#{price},discount=#{discount},sketch=#{sketch}
         where
          id=#{id}
         </if>
+    </update>
+
+    <!--  编辑图片  -->
+    <update id="updateImage">
+        update commodity set
+            image=#{image}
+            where
+            id=#{id}
     </update>
 
     <!--    导入导出-->

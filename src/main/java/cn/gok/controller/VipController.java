@@ -40,7 +40,7 @@ public class VipController {
     @ResponseBody
     public Result save(@RequestBody Vip vip) {
         Result result = null;
-        Vip check1 = vipService.findVipByName(vip.getName());
+        Vip check1 = vipService.findVipByName(vip.getIdentity());
         if(check1==null) {
             int check = vipService.save(vip);
             if (check > 0) {

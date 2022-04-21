@@ -26,4 +26,6 @@ public interface CommodityService {
 
     //导出到Excel
     public HSSFWorkbook exportToExcel(List<Commodity> Commoditys);
+
+    public int updateImage(String imagem, Long id);
 }

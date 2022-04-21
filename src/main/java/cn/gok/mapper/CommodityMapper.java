@@ -14,10 +14,14 @@ public interface CommodityMapper {
     //编辑
     public int update(Commodity commodity);
 
+    //更新图片
+    public int updateImage(String image,Long id);
     //导入导出
     public List<Commodity> getcommoditys();//查询所有
     public Commodity findById(Long id);
 
     //删除
     public int delete(Commodity commodity);
+
+
 }

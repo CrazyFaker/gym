@@ -40,6 +40,11 @@ public class ConsumeServiceImpl implements ConsumeService {
     }
 
     @Override
+    public List<Consume> listVip(Long vid) {
+        return consumeMapper.listVip(vid);
+
+    }
+    @Override
     public HSSFWorkbook exportToExcel(List<Consume> consumes) {
         HSSFWorkbook wb = new HSSFWorkbook();
         HSSFSheet sheet = wb.createSheet("cosume_info");

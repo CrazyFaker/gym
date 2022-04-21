@@ -39,8 +39,8 @@ public class VipServiceImpl implements VipService {
     }
 
     @Override
-    public Vip findVipByName(String name) {
-            return vipMapper.findVipByName(name);
+    public Vip findVipByName(String identity) {
+            return vipMapper.findVipByName(identity);
 
     }
 
@@ -66,6 +66,8 @@ public class VipServiceImpl implements VipService {
         }
 
     }
+
+
 
     @Override
     public int delete(Vip vip) {

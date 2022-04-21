@@ -52,7 +52,7 @@ select * from vip where id=#{id}
     <select id="findVipByName" resultType="cn.gok.entity.Vip">
         select *
         from vip
-        where `name` = #{name}
+        where identity = #{identity}
     </select>
 
 

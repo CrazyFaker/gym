@@ -12,6 +12,7 @@ public class Order {
     private DateTime time;
     private Integer orderNumber;
     private String realTime;
+    private String status;
     private Integer vip;
 
 

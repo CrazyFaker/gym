@@ -16,4 +16,7 @@ public interface ConsumeMapper {
 
     //导入导出
     public List<Consume> getconsumes();//查询所有
+
+    //查询vip
+    public List<Consume> listVip(Long vid);
 }

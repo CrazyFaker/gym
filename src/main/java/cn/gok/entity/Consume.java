@@ -14,4 +14,5 @@ public class Consume {
     private String createTime;
     private Long vip;
     private String vname;
+    private String sketch;
 }

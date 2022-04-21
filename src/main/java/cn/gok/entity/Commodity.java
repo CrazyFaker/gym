@@ -13,6 +13,7 @@ public class Commodity {
     private String sketch;
     private Double price;
     private Integer discount;
+    private String image;
 
 
 

@@ -12,6 +12,10 @@
         </if>
     </select>
 
+    <!--会员查询    -->
+    <select id="listVip" resultType="cn.gok.entity.Consume">
+       SELECT c.*,a.sketch FROM consume c,commodity a WHERE c.name = a.cname and c.vip= #{vip}
+    </select>
     <!--   新增 -->
     <insert id="save">
         insert into consume (name,price,number,status,vip,vname)

@@ -13,13 +13,14 @@ public interface VipService {
     public PageInfo<Vip> list(String searchKey, Integer pageNum, Integer pageSize);
 
     //查找名字是否相同
-    public Vip findVipByName(String name) ;
+    public Vip findVipByName(String identity) ;
 
     //增
     public int save(Vip vip);
 
     //更新
     public int update(Vip vip);
+
 
     //删
     public int delete(Vip vip);

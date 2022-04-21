@@ -11,7 +11,8 @@ public interface ConsumeService {
 
 
     public int save(Consume consume);
-
+    //查询会员
+    public List<Consume> listVip(Long vid);
 
     //导出到Excel
     public HSSFWorkbook exportToExcel(List<Consume> consumes);

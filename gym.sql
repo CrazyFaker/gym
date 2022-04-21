@@ -11,7 +11,7 @@
  Target Server Version : 50731
  File Encoding         : 65001
 
- Date: 20/04/2022 20:36:55
+ Date: 21/04/2022 17:12:17
 */
 
 SET NAMES utf8mb4;
@@ -24,13 +24,13 @@ DROP TABLE IF EXISTS `activity`;
 CREATE TABLE `activity`  (
   `id` bigint(11) NOT NULL AUTO_INCREMENT,
   `activityName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `image` longblob NULL,
+  `image` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `introduction` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `number` int(11) NOT NULL,
   `price` decimal(10, 0) NOT NULL,
   `startTime` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `endTime` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `duration` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `createTime` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
   `coachId` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `coachName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
@@ -41,11 +41,11 @@ CREATE TABLE `activity`  (
 -- ----------------------------
 -- Records of activity
 -- ----------------------------
-INSERT INTO `activity` VALUES (1001, '动感单车', '', '运动', '123', 20, 200, '2022-04-08 10:46:40', '2022-04-15 09:46:58', '2022-04-20 19:46:15', '1003', '陈一', '0');
-INSERT INTO `activity` VALUES (1002, 'HIT燃脂', NULL, '运动', '123', 20, 200, '2022-04-07 06:01:00', '2022-04-07 08:00:00', '2022-04-20 19:46:15', '1001', '李四', '0');
-INSERT INTO `activity` VALUES (1003, '太空漫步', NULL, '运动', '445', 20, 200, '2022-04-08 09:58:54', '2022-06-08 10:58:56', '2022-04-20 19:46:09', '1003', '陈一', '1');
-INSERT INTO `activity` VALUES (1005, '跑步', NULL, '运动', '55', 5, 50, '2022-04-14 09:59:13', '2022-06-20 15:55:08', '2022-04-20 19:46:12', '1001', '李四', '1');
-INSERT INTO `activity` VALUES (1006, '跳绳', NULL, '运动', '22', 10, 100, '2022-04-14 09:59:13', '2022-04-14 11:59:15', '2022-04-20 19:46:15', '1004', '李青', '0');
+INSERT INTO `activity` VALUES (1001, '动感单车', '', '运动', '123', 20, 200, '2022-04-08 10:46:40', '2', '2022-04-21 11:04:56', '1003', '陈一', '0');
+INSERT INTO `activity` VALUES (1002, 'HIT燃脂', NULL, '运动', '123', 20, 200, '2022-04-07 06:01:00', '1.5', '2022-04-21 11:05:00', '1001', '李四', '0');
+INSERT INTO `activity` VALUES (1003, '太空漫步', NULL, '运动', '445', 20, 200, '2022-04-30 09:58:54', '1', '2022-04-21 11:05:34', '1003', '陈一', '1');
+INSERT INTO `activity` VALUES (1005, '跑步', NULL, '运动', '55', 5, 50, '2022-04-30 09:59:13', '2', '2022-04-21 11:05:10', '1001', '李四', '1');
+INSERT INTO `activity` VALUES (1006, '跳绳', NULL, '运动', '22', 10, 100, '2022-04-30 09:59:13', '1', '2022-04-21 11:05:26', '1004', '李青', '1');
 
 -- ----------------------------
 -- Table structure for coach
@@ -112,6 +112,26 @@ CREATE TABLE `consume`  (
 -- Records of consume
 -- ----------------------------
 INSERT INTO `consume` VALUES (1, '哑铃', 2, 100, '1', '2022-04-04 21:17:50', 00000001001, '张三');
+
+-- ----------------------------
+-- Table structure for friend
+-- ----------------------------
+DROP TABLE IF EXISTS `friend`;
+CREATE TABLE `friend`  (
+  `id` bigint(32) NOT NULL AUTO_INCREMENT,
+  `vid` int(11) NULL DEFAULT NULL,
+  `image` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `value` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `createTime` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1004 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of friend
+-- ----------------------------
+INSERT INTO `friend` VALUES (1001, 1001, NULL, '好看', '2022-04-20 23:22:47');
+INSERT INTO `friend` VALUES (1002, 1002, NULL, '真美', '2021-11-01 23:22:58');
+INSERT INTO `friend` VALUES (1003, 1001, NULL, NULL, '2022-04-28 00:14:31');
 
 -- ----------------------------
 -- Table structure for order
