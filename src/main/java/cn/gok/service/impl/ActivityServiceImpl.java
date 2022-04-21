@@ -22,9 +22,9 @@ public class ActivityServiceImpl implements ActivityService {
         PageHelper.startPage(pageNum,pageSize);
         List<Activity> list=activityMapper.list(searchKey);
         for( int i = 0; i < list.size() ; i++){
-            String endTime=dateToStamp(list.get(i).getEndTime());
+            String startTime=dateToStamp(list.get(i).getStartTime());
             String currentTime = String.valueOf(System.currentTimeMillis());
-            int res = endTime.compareTo(currentTime);
+            int res = startTime.compareTo(currentTime);
             if(res < 0){
                 activityMapper.delete(list.get(i).getId());
             }
@@ -41,6 +41,10 @@ public class ActivityServiceImpl implements ActivityService {
         return  activityMapper.save(activity);
     }
 
+    @Override
+    public int saveImage(String image) {
+        return activityMapper.saveImage(image);
+    }
 
 
     @Override

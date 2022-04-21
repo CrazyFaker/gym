@@ -12,6 +12,9 @@ public interface ActivityMapper {
     //新增
     public int save(Activity activity);
 
+    //新增
+    public int saveImage(String image);
+
     //编辑
     public int update(Activity activity);
 

@@ -10,10 +10,10 @@ public class Activity {
     private String createTime;
     private String activityName;
     private String startTime;
-    private byte[] image;
+    private String image;
     private Integer number;
     private Integer price;
-    private String endTime;
+    private String duration;
     private Integer coachId;
     private String coachName;
     private String is_Delete;

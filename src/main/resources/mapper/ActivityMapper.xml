@@ -8,7 +8,7 @@
 select * from activity where is_Delete = 1
    <if test="searchKey !=null and searchKey !=''">
      and activityName like CONCAT(CONCAT('%', #{searchKey}), '%')
-       or endTime like CONCAT(CONCAT('%', #{searchKey}), '%')
+       or duration like CONCAT(CONCAT('%', #{searchKey}), '%')
        or startTime like CONCAT(CONCAT('%', #{searchKey}), '%')
        or coachId like CONCAT(CONCAT('%', #{searchKey}), '%')
        or coachName like CONCAT(CONCAT('%', #{searchKey}), '%')
@@ -17,14 +17,15 @@ select * from activity where is_Delete = 1
 </select>
 <!--    增-->
     <insert id="save">
-     insert into activity(activityName,`number`,type,introduction,price,startTime,endTime,coachId,coachName,is_Delete)
-          values (#{activityName},#{number},#{type},#{introduction},#{price},#{startTime},#{endTime},(select id from coach where `name`=#{coachName}),#{coachName},'1')
+     insert into activity(activityName,`number`,image,type,introduction,price,startTime,duration,coachId,coachName,is_Delete)
+          values (#{activityName},#{number},#{image},#{type},#{introduction},#{price},#{startTime},#{duration},(select id from coach where `name`=#{coachName}),#{coachName},'1')
     </insert>
+
 
 <!--    改-->
     <update id="update">
 update activity set
-            activityName=#{activityName},`number`=#{number},type=#{type}introduction=#{introduction},price=#{price},startTime=#{startTime},endTime=#{endTime},coachId=#{coachId},coachName=#{coachName}
+            activityName=#{activityName},`number`=#{number},image=#{image},type=#{type}introduction=#{introduction},price=#{price},startTime=#{startTime},duration=#{duration},coachId=#{coachId},coachName=#{coachName}
             where
             id=#{id}
     </update>

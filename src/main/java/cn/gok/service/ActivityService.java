@@ -11,6 +11,8 @@ public interface ActivityService {
 
     public int save(Activity activity);
 
+    public int saveImage(String image);
+
 
     public int update(Activity activity);
 

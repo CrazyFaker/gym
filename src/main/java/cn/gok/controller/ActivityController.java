@@ -47,6 +47,21 @@ public class ActivityController {
         return result;
     }
 
+    @RequestMapping("/add_image")
+    @ResponseBody
+    public Result saveImage(@RequestParam String image) {
+        Result result = null;
+
+        int check = activityService.saveImage(image);
+        if (check > 0) {
+            result = Result.success(null);
+        } else {
+            result = Result.error("保存图片失败");
+        }
+
+        return result;
+    }
+
     @RequestMapping("/update")
     @ResponseBody
     public Result update(@RequestBody Activity activity){
