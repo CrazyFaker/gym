@@ -54,6 +54,20 @@ select * from vip where id=#{id}
         from vip
         where identity = #{identity}
     </select>
+<!--存入手机号-->
+    <update id="updatePhone">
+        update vip set
+           tel=#{tel}
+        where
+            id=#{id}
+    </update>
 
+    <!--  编辑图片  -->
+    <update id="updateImage">
+        update vip set
+            image=#{image}
+        where
+            id=#{id}
+    </update>
 
 </mapper>

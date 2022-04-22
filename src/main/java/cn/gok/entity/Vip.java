@@ -14,5 +14,6 @@ public class Vip {
     private String createTime;
     private String age;
     private String identity;
+    private String image;
 
 }

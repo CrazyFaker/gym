@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gok.mapper.VenueMapper">
+    <!--    查-->
+    <select id="list" resultType="cn.gok.entity.Venue">
+        select * from venue where
+        <if test="searchKey !=null and searchKey !=''">
+            and `name` like CONCAT(CONCAT('%', #{searchKey}), '%')
+            or status like CONCAT(CONCAT('%', #{searchKey}), '%')
+            or startTime like CONCAT(CONCAT('%', #{searchKey}), '%')
+        </if>
+    </select>
+    <!--    增-->
+    <insert id="save">
+        insert into venue(name,startTime,endTime,status)
+        values (#{name},#{startTime},#{endTime},'0')
+    </insert>
+
+    <!--  编辑图片  -->
+    <update id="updateImage">
+        update venue set
+            image=#{image}
+        where
+            id=#{id}
+    </update>
+
+    <!--    改-->
+    <update id="update">
+        update venue set
+           name=#{name},startTime=#{startTime},endTime=#{endTime}
+        where
+            id=#{id}
+    </update>
+    <!--    更改场馆状态-->
+    <update id="updateStatus">
+        update venue set
+            status = #{status}
+        where
+            id=#{id}
+    </update>
+
+    <!--    删-->
+    <delete id="delete">
+      delete from venue where id =#{id}
+    </delete>
+
+
+
+
+</mapper>

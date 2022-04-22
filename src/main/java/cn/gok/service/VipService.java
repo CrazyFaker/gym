@@ -32,4 +32,10 @@ public interface VipService {
 
     //导出到Excel
     public HSSFWorkbook exportToExcel(List<Vip> vips);
+
+    //更新手机号
+    public int updatePhone(String phone,Long id);
+
+    //更新图片
+    public int updateImage(String image, Long id);
 }

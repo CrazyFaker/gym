@@ -8,4 +8,18 @@
         select * from friend order by createTime desc
     </select>
 
+    <!--    增-->
+    <insert id="save">
+        insert into activity(activityName,`number`,type,introduction,price,startTime,duration,coachId,coachName,is_Delete)
+        values (#{activityName},#{number},#{type},#{introduction},#{price},#{startTime},#{duration},(select id from coach where `name`=#{coachName}),#{coachName},'1')
+    </insert>
+
+    <!--  编辑图片  -->
+    <update id="updateImage">
+        update friend set
+            image=#{image}
+        where
+            id=#{id}
+    </update>
+
 </mapper>

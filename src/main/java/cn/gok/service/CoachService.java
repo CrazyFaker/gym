@@ -18,6 +18,8 @@ public interface CoachService {
 
     public int update(Coach coach);
 
+    //更新图片
+    public int updateImage(String image,Long id);
 
     public int delete(Coach coach);
 

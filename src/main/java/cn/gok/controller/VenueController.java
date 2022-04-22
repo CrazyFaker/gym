@@ -1,9 +1,9 @@
 package cn.gok.controller;
 
 
-import cn.gok.entity.Activity;
 import cn.gok.entity.Result;
-import cn.gok.service.ActivityService;
+import cn.gok.entity.Venue;
+import cn.gok.service.VenueService;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,14 +17,14 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Calendar;
-import java.util.UUID;
 
 @CrossOrigin
 @Controller
-@RequestMapping("/api/activity")
-public class ActivityController {
-    @Autowired(required = false)
-    private ActivityService activityService;
+@RequestMapping("/api/venue")
+public class VenueController {
+
+    @Autowired
+    private VenueService venueService;
 
     @RequestMapping("/list")
     @ResponseBody
@@ -33,18 +33,18 @@ public class ActivityController {
         //给他默认的页码以及默认的每页的数目
         Integer pageNum = json.getInteger("pageNum") == null ? 1 : json.getInteger("pageNum");
         Integer pageSize = json.getInteger("pageSize") == null ? 5 : json.getInteger("pageSize");
-        PageInfo<Activity> list = activityService.list(searchKey, pageNum, pageSize);
+        PageInfo<Venue> list = venueService.list(searchKey, pageNum, pageSize);
 
         return Result.success(list);
     }
 
     @RequestMapping("/add")
     @ResponseBody
-    public Result save(@RequestBody Activity activity) {
+    public Result save(@RequestBody Venue venue) {
         Result result = null;
 
 
-        int check = activityService.save(activity);
+        int check = venueService.save(venue);
         if (check > 0) {
             result = Result.success(null);
         } else {
@@ -58,10 +58,10 @@ public class ActivityController {
 
     @RequestMapping("/update")
     @ResponseBody
-    public Result update(@RequestBody Activity activity){
+    public Result update(@RequestBody Venue venue){
         Result result=null;
 
-        int check = activityService.update(activity);
+        int check = venueService.update(venue);
         if(check>0){
             result=Result.success(null);
         }else {
@@ -71,32 +71,16 @@ public class ActivityController {
         return result;
     }
 
-
-    @RequestMapping("/updatecoach")
+    @RequestMapping("/update_status")
     @ResponseBody
-    public Result updateCoach(@RequestBody Activity activity){
+    public Result update(@RequestParam String status ,@RequestParam Long id){
         Result result=null;
 
-        int check = activityService.updateCoach(activity);
+        int check = venueService.updateStatus(status,id);
         if(check>0){
             result=Result.success(null);
         }else {
-            result= Result.error("更新失败");
-        }
-
-        return result;
-    }
-
-    @RequestMapping("/update_number")
-    @ResponseBody
-    public Result updateNumber(@RequestParam Long id){
-        Result result=null;
-
-        int check = activityService.updateNumber(id);
-        if(check>0){
-            result=Result.success(null);
-        }else {
-            result= Result.error("更新活动人数失败");
+            result= Result.error("更新场馆状态失败");
         }
 
         return result;
@@ -104,10 +88,10 @@ public class ActivityController {
 
     @RequestMapping("/del")
     @ResponseBody
-    public Result delete(@RequestParam Long id) {
+    public Result delete(@RequestParam Venue venue) {
         Result result=null;
 
-        int check = activityService.delete(id);
+        int check = venueService.delete(venue);
         if(check>0){
             result=Result.success(null);
         }else {
@@ -116,7 +100,6 @@ public class ActivityController {
 
         return result;
     }
-
     /**
      　　* @description: 图片上传
      　　*/
@@ -126,10 +109,10 @@ public class ActivityController {
     @ResponseBody
     @RequestMapping(value ="upload", method = RequestMethod.POST)
 //    图片是以content-type为multipart/form-data的格式上传的，所以使用spring-mvc可以通过使用参数的形式以二进制的格式获取到该图片。
-    public String upload(HttpServletRequest request, @RequestParam(value = "file", required = false) MultipartFile file,Activity num) throws IOException {
+    public String upload(HttpServletRequest request, @RequestParam(value = "file", required = false) MultipartFile file, Venue venue) throws IOException {
         System.out.println("执行upload");
         System.out.println(file);
-        Long id = num.getId();
+        Long id = venue.getId();
         request.setCharacterEncoding("UTF-8");
 //        log.info("执行图片上传");
         String pdNo = request.getParameter("pdNo");
@@ -154,7 +137,7 @@ public class ActivityController {
 
                     String date="("+year+"-"+month+"-"+day+")";
 //                    String trueFileName =pdNo+"-"+date+fileName.substring(fileName.lastIndexOf("."));
-                    String trueFileName = UUID.randomUUID()+pdNo+"-"+date+".jpg";//把图片都变成jpg格式，按需求决定该不该格式
+                    String trueFileName =pdNo+"-"+date+".jpg";//把图片都变成jpg格式，按需求决定该不该格式
 //                    log.info("图片自定义名称为：" + trueFileName + " 类型为：" + type);
                     // 设置存放图片文件的路径
                     path = realPath +trueFileName;
@@ -167,13 +150,8 @@ public class ActivityController {
                     //保存文件
                     file.transferTo(new File(path));
 //                    log.info("文件成功上传到指定目录下");
-                    avator= request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/images/" + trueFileName;
+                    avator=request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/images/" + trueFileName;
 //                    log.info("数据库存放图片文件的路径:" + avator);
-                    int check =  activityService.updateImage(avator,id);
-                    System.out.println(check);
-                    System.out.println(avator);
-                    System.out.println(id);
-
                 }else {
 //                    log.info("不是我们想要的文件类型,请按要求重新上传");
                     return "error";
@@ -186,6 +164,8 @@ public class ActivityController {
 //            log.info("没有找到相对应的文件");
             return "error";
         }
+        venueService.updateImage(avator,id);
         return avator;//返回图片访问路径，可以把这个连接存到数据库里，小程序端以后就可以直接访问图片了
     }
+
 }

@@ -17,15 +17,28 @@ select * from activity where is_Delete = 1
 </select>
 <!--    增-->
     <insert id="save">
-     insert into activity(activityName,`number`,image,type,introduction,price,startTime,duration,coachId,coachName,is_Delete)
-          values (#{activityName},#{number},#{image},#{type},#{introduction},#{price},#{startTime},#{duration},(select id from coach where `name`=#{coachName}),#{coachName},'1')
+     insert into activity(activityName,`number`,type,introduction,price,startTime,duration,coachId,coachName,is_Delete)
+          values (#{activityName},#{number},#{type},#{introduction},#{price},#{startTime},#{duration},(select id from coach where `name`=#{coachName}),#{coachName},'1')
     </insert>
 
+    <!--  编辑图片  -->
+    <update id="updateImage">
+        update activity set
+            image=#{image}
+        where
+            id=#{id}
+    </update>
+
+
+<!--    活动人数减少-->
+    <update id="updateNumber">
+    update activity SET number=number-1  WHERE id = #{id}
+</update>
 
 <!--    改-->
     <update id="update">
 update activity set
-            activityName=#{activityName},`number`=#{number},image=#{image},type=#{type}introduction=#{introduction},price=#{price},startTime=#{startTime},duration=#{duration},coachId=#{coachId},coachName=#{coachName}
+            activityName=#{activityName},`number`=#{number},image=#{image},type=#{type},introduction=#{introduction},price=#{price},startTime=#{startTime},duration=#{duration},coachId=#{coachId},coachName=#{coachName}
             where
             id=#{id}
     </update>

@@ -212,5 +212,10 @@ public class CommodityServiceImpl implements CommodityService {
         return commodityMapper.updateImage(image,id);
     }
 
+    @Override
+    public int updateNumber(Long id) {
+        return commodityMapper.updateNumber(id);
+    }
+
 }
 

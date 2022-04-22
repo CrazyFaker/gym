@@ -12,7 +12,7 @@ public class Coach {
     private String name;
     private String describe;
     private String age;
-    private String picture;
+    private String image;
     private String tel;
 
 

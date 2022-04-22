@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Calendar;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/api/commodity")
@@ -62,6 +63,21 @@ public class CommodityController {
             result=Result.success(null);
         }else {
             result= Result.error("更新失败");
+        }
+
+        return result;
+    }
+
+    @RequestMapping("/update_number")
+    @ResponseBody
+    public Result updateNumber(@RequestParam Long id){
+        Result result=null;
+
+        int check = commodityService.updateNumber(id);
+        if(check>0){
+            result=Result.success(null);
+        }else {
+            result= Result.error("更新商品数量失败");
         }
 
         return result;
@@ -119,9 +135,11 @@ public class CommodityController {
     @ResponseBody
     @RequestMapping(value ="upload", method = RequestMethod.POST)
 //    图片是以content-type为multipart/form-data的格式上传的，所以使用spring-mvc可以通过使用参数的形式以二进制的格式获取到该图片。
-    public String upload(HttpServletRequest request, @RequestParam(value = "file", required = false) MultipartFile file,@RequestParam Long id) throws IOException {
+    public String upload(HttpServletRequest request, @RequestParam(value = "file", required = false) MultipartFile file,@RequestBody Commodity commodity) throws IOException {
         System.out.println("执行upload");
         request.setCharacterEncoding("UTF-8");
+
+        Long id = commodity.getId();
 //        log.info("执行图片上传");
         String pdNo = request.getParameter("pdNo");
 //        log.info("pdNo:"+pdNo);
@@ -145,7 +163,7 @@ public class CommodityController {
 
                     String date="("+year+"-"+month+"-"+day+")";
 //                    String trueFileName =pdNo+"-"+date+fileName.substring(fileName.lastIndexOf("."));
-                    String trueFileName =pdNo+"-"+date+".jpg";//把图片都变成jpg格式，按需求决定该不该格式
+                    String trueFileName = UUID.randomUUID()+pdNo+"-"+date+".jpg";//把图片都变成jpg格式，按需求决定该不该格式
 //                    log.info("图片自定义名称为：" + trueFileName + " 类型为：" + type);
                     // 设置存放图片文件的路径
                     path = realPath +trueFileName;

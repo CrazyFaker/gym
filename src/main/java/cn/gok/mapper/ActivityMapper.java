@@ -15,11 +15,16 @@ public interface ActivityMapper {
     //新增
     public int saveImage(String image);
 
+    public int updateImage(String image,Long id);
+
     //编辑
     public int update(Activity activity);
 
     //更新活动所属教练
     public int updateCoach(Activity activity);
+
+    //更新活动人数
+    public int updateNumber(Long id);
 
     //删除
     public int delete(Long id);

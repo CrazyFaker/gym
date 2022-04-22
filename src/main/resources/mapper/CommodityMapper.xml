@@ -30,6 +30,11 @@
         </if>
     </update>
 
+    <!--    商品数量减少-->
+    <update id="updateNumber">
+        update commodity SET number=number-1  WHERE id = #{id}
+    </update>
+
     <!--  编辑图片  -->
     <update id="updateImage">
         update commodity set

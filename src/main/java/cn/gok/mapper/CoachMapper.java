@@ -1,8 +1,6 @@
 package cn.gok.mapper;
 
 import cn.gok.entity.Coach;
-import cn.gok.entity.Vip;
-
 
 import java.util.List;
 
@@ -15,6 +13,9 @@ public interface CoachMapper {
 
     //编辑
     public int update(Coach coach);
+
+    //更新活动人数
+    public int updateImage(String image,Long id);
 
 
     //删除

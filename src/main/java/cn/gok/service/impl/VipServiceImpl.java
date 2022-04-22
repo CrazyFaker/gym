@@ -238,4 +238,14 @@ public class VipServiceImpl implements VipService {
         return wb;
     }
 
+    @Override
+    public int updatePhone(String phone, Long id) {
+        return vipMapper.updatePhone(phone,id);
+    }
+
+    @Override
+    public int updateImage(String image, Long id) {
+        return vipMapper.updateImage(image,id);
+    }
+
 }

@@ -18,6 +18,10 @@ public interface VipMapper {
     //查找名字是否相同
     public Vip findVipByName(String name) ;
 
+    public int updatePhone(String phone,Long id);
+
+    //更新图片
+    public int updateImage(String image,Long id);
 
     //删除
     public int delete(Vip vip);

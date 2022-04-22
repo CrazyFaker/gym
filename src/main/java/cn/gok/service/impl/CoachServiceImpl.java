@@ -62,6 +62,10 @@ public class CoachServiceImpl implements CoachService {
         }
     }
 
+    @Override
+    public int updateImage(String image, Long id) {
+        return coachMapper.updateImage(image,id);
+    }
 
 
     @Override

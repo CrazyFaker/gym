@@ -41,10 +41,7 @@ public class ActivityServiceImpl implements ActivityService {
         return  activityMapper.save(activity);
     }
 
-    @Override
-    public int saveImage(String image) {
-        return activityMapper.saveImage(image);
-    }
+
 
 
     @Override
@@ -58,11 +55,22 @@ public class ActivityServiceImpl implements ActivityService {
         return activityMapper.updateCoach(activity);
     }
 
+    @Override
+    public int updateNumber(Long id) {
+        return activityMapper.updateNumber(id);
+    }
+
 
     @Override
     public int delete(Long id) {
 
         return  activityMapper.delete(id);
+    }
+
+    @Override
+    public int updateImage(String image, Long id) {
+        System.out.println(image+"-------------");
+        return activityMapper.updateImage(image,id);
     }
 
     /**

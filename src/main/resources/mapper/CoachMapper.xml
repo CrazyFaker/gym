@@ -27,6 +27,14 @@ update coach set
             where
             id=#{id}
     </update>
+
+    <!--  编辑图片  -->
+    <update id="updateImage">
+        update coach set
+            image=#{image}
+        where
+            id=#{id}
+    </update>
 <!--    删-->
     <delete id="delete">
 delete from coach where id=#{id}
