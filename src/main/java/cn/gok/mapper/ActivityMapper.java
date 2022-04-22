@@ -9,6 +9,9 @@ public interface ActivityMapper {
     //列表查询
     public List<Activity> list(String searchKey);
 
+    //列表查询
+    public List<Activity> listActivity(Long id);
+
     //新增
     public int save(Activity activity);
 

@@ -19,4 +19,6 @@ public class Activity {
     private String is_Delete;
     private String introduction;
     private String type;
+    private Long vid;
+    private Long aid;
 }

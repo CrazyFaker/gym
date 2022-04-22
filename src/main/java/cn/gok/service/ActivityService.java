@@ -4,13 +4,16 @@ import cn.gok.entity.Activity;
 import com.github.pagehelper.PageInfo;
 
 import java.text.ParseException;
+import java.util.List;
 
 public interface ActivityService {
     //列表查询
     public PageInfo<Activity> list(String searchKey, Integer pageNum, Integer pageSize) throws ParseException;
 
+    public List<Activity> listActivity(Long vid);
     //新增
     public int save(Activity activity);
+
 
     //更新
     public int update(Activity activity);

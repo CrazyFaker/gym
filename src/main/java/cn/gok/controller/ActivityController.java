@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Calendar;
+import java.util.List;
 import java.util.UUID;
 
 @CrossOrigin
@@ -35,6 +36,14 @@ public class ActivityController {
         Integer pageSize = json.getInteger("pageSize") == null ? 5 : json.getInteger("pageSize");
         PageInfo<Activity> list = activityService.list(searchKey, pageNum, pageSize);
 
+        return Result.success(list);
+    }
+
+    @RequestMapping("/list_activity")
+    @ResponseBody
+    public Result listActivity(@RequestParam Long vid) {
+
+        List<Activity> list = activityService.listActivity(vid);
         return Result.success(list);
     }
 
@@ -126,10 +135,10 @@ public class ActivityController {
     @ResponseBody
     @RequestMapping(value ="upload", method = RequestMethod.POST)
 //    图片是以content-type为multipart/form-data的格式上传的，所以使用spring-mvc可以通过使用参数的形式以二进制的格式获取到该图片。
-    public String upload(HttpServletRequest request, @RequestParam(value = "file", required = false) MultipartFile file,Activity num) throws IOException {
+    public String upload(HttpServletRequest request, @RequestParam(value = "file", required = false) MultipartFile file,Activity activity) throws IOException {
         System.out.println("执行upload");
         System.out.println(file);
-        Long id = num.getId();
+        Long id = activity.getId();
         request.setCharacterEncoding("UTF-8");
 //        log.info("执行图片上传");
         String pdNo = request.getParameter("pdNo");
@@ -169,10 +178,8 @@ public class ActivityController {
 //                    log.info("文件成功上传到指定目录下");
                     avator= request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/images/" + trueFileName;
 //                    log.info("数据库存放图片文件的路径:" + avator);
-                    int check =  activityService.updateImage(avator,id);
-                    System.out.println(check);
-                    System.out.println(avator);
-                    System.out.println(id);
+
+
 
                 }else {
 //                    log.info("不是我们想要的文件类型,请按要求重新上传");
@@ -186,6 +193,7 @@ public class ActivityController {
 //            log.info("没有找到相对应的文件");
             return "error";
         }
+        activityService.updateImage(avator,id);
         return avator;//返回图片访问路径，可以把这个连接存到数据库里，小程序端以后就可以直接访问图片了
     }
 }

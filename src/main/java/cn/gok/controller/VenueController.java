@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Calendar;
+import java.util.UUID;
 
 @CrossOrigin
 @Controller
@@ -137,7 +138,7 @@ public class VenueController {
 
                     String date="("+year+"-"+month+"-"+day+")";
 //                    String trueFileName =pdNo+"-"+date+fileName.substring(fileName.lastIndexOf("."));
-                    String trueFileName =pdNo+"-"+date+".jpg";//把图片都变成jpg格式，按需求决定该不该格式
+                    String trueFileName = UUID.randomUUID()+pdNo+"-"+date+".jpg";//把图片都变成jpg格式，按需求决定该不该格式
 //                    log.info("图片自定义名称为：" + trueFileName + " 类型为：" + type);
                     // 设置存放图片文件的路径
                     path = realPath +trueFileName;

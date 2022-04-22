@@ -5,7 +5,9 @@
 <mapper namespace="cn.gok.mapper.FriendMapper">
     <!--    查-->
     <select id="list" resultType="cn.gok.entity.Friend">
-        select * from friend order by createTime desc
+        select * from friend where 1=1
+            and vid like CONCAT(CONCAT('%', #{searchKey}), '%')
+        order by createTime desc
     </select>
 
     <!--    增-->

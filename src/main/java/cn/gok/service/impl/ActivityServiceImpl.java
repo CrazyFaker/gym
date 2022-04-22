@@ -34,6 +34,11 @@ public class ActivityServiceImpl implements ActivityService {
         return pageInfo;
     }
 
+    @Override
+    public List<Activity> listActivity(Long vid) {
+        return activityMapper.listActivity(vid);
+    }
+
 
     @Override
     public int save(Activity activity) {

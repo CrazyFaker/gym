@@ -4,9 +4,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.gok.mapper.ConsumeMapper">
     <select id="list" resultType="cn.gok.entity.Consume">
-        select * from consume where status = 1
+        select * from consume where 1=1
         <if test="searchKey!=null and searchKey!=''">
             and vname like CONCAT(CONCAT('%', #{searchKey}), '%')
+            or status like CONCAT(CONCAT('%', #{searchKey}), '%')
             or vip like CONCAT(CONCAT('%', #{searchKey}), '%')
             or name like CONCAT(CONCAT('%', #{searchKey}), '%')
         </if>

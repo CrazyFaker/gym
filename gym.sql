@@ -11,7 +11,7 @@
  Target Server Version : 50731
  File Encoding         : 65001
 
- Date: 21/04/2022 17:12:17
+ Date: 22/04/2022 22:22:17
 */
 
 SET NAMES utf8mb4;
@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS `activity`;
 CREATE TABLE `activity`  (
   `id` bigint(11) NOT NULL AUTO_INCREMENT,
   `activityName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `image` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `image` varchar(4000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `introduction` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `number` int(11) NOT NULL,
@@ -41,11 +41,11 @@ CREATE TABLE `activity`  (
 -- ----------------------------
 -- Records of activity
 -- ----------------------------
-INSERT INTO `activity` VALUES (1001, '动感单车', '', '运动', '123', 20, 200, '2022-04-08 10:46:40', '2', '2022-04-21 11:04:56', '1003', '陈一', '0');
+INSERT INTO `activity` VALUES (1001, '动感单车', 'http://localhost:8082/images/de5a4cf7-b856-4c4e-823c-504a3eda8668null-(2022-4-22).jpg', '运动', '123', 19, 200, '2022-04-08 10:46:40', '2', '2022-04-22 22:17:44', '1003', '陈一', '0');
 INSERT INTO `activity` VALUES (1002, 'HIT燃脂', NULL, '运动', '123', 20, 200, '2022-04-07 06:01:00', '1.5', '2022-04-21 11:05:00', '1001', '李四', '0');
-INSERT INTO `activity` VALUES (1003, '太空漫步', NULL, '运动', '445', 20, 200, '2022-04-30 09:58:54', '1', '2022-04-21 11:05:34', '1003', '陈一', '1');
-INSERT INTO `activity` VALUES (1005, '跑步', NULL, '运动', '55', 5, 50, '2022-04-30 09:59:13', '2', '2022-04-21 11:05:10', '1001', '李四', '1');
-INSERT INTO `activity` VALUES (1006, '跳绳', NULL, '运动', '22', 10, 100, '2022-04-30 09:59:13', '1', '2022-04-21 11:05:26', '1004', '李青', '1');
+INSERT INTO `activity` VALUES (1003, '太空漫步', 'http://localhost:8082/images/89b77939-1518-48f8-be27-27f54f663c0anull-(2022-4-22).jpg', '运动', '111', 20, 200, '2022-04-30 09:58:54', '1', '2022-04-22 22:16:00', '1003', '陈一', '1');
+INSERT INTO `activity` VALUES (1005, '跑步', 'http://localhost:8082/images/null-(2022-4-22).jpg', '运动', '55', 5, 50, '2022-04-30 09:59:13', '2', '2022-04-22 22:17:03', '1001', '李四', '1');
+INSERT INTO `activity` VALUES (1006, '跳绳', 'http://localhost:8082/images/87c88613-6200-4237-8273-4296f2db8efenull-(2022-4-22).jpg', '运动', '22', 10, 100, '2022-04-30 09:59:13', '1', '2022-04-22 21:22:57', '1004', '李青', '1');
 
 -- ----------------------------
 -- Table structure for coach
@@ -57,7 +57,7 @@ CREATE TABLE `coach`  (
   `sex` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `tel` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `describe` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `picture` varchar(4000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `image` varchar(4000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `age` varchar(2) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `createTime` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE
@@ -82,15 +82,17 @@ CREATE TABLE `commodity`  (
   `discount` double(2, 1) NULL DEFAULT NULL,
   `sketch` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `createTime` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
+  `image` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '1为卡，2为实物',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1012 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of commodity
 -- ----------------------------
-INSERT INTO `commodity` VALUES (1001, '季卡', 50, 500.00, 1.0, '时间为3个月', '2022-04-06 16:22:48');
-INSERT INTO `commodity` VALUES (1002, '月卡', 100, 200.00, 2.0, NULL, '2022-04-06 16:22:50');
-INSERT INTO `commodity` VALUES (1011, '哑铃', 100, 100.00, 1.0, '11', '2022-04-04 20:24:47');
+INSERT INTO `commodity` VALUES (1001, '季卡', 50, 500.00, 1.0, '时间为3个月', '2022-04-22 15:42:50', 'http://localhost:8082/images/null-(2022-4-21).jpg', '1');
+INSERT INTO `commodity` VALUES (1002, '月卡', 100, 200.00, 2.0, NULL, '2022-04-22 15:42:51', NULL, '1');
+INSERT INTO `commodity` VALUES (1011, '哑铃', 100, 100.00, 1.0, '11', '2022-04-22 15:42:54', NULL, '0');
 
 -- ----------------------------
 -- Table structure for consume
@@ -103,15 +105,16 @@ CREATE TABLE `consume`  (
   `price` decimal(10, 0) NOT NULL,
   `status` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `createTime` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
-  `vip` bigint(11) UNSIGNED ZEROFILL NOT NULL,
+  `vip` bigint(4) UNSIGNED ZEROFILL NULL DEFAULT NULL,
   `vname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of consume
 -- ----------------------------
-INSERT INTO `consume` VALUES (1, '哑铃', 2, 100, '1', '2022-04-04 21:17:50', 00000001001, '张三');
+INSERT INTO `consume` VALUES (1, '哑铃', 2, 100, '1', '2022-04-04 21:17:50', 1001, '张三');
+INSERT INTO `consume` VALUES (2, '季卡', 1, 200, '1', '2022-04-21 19:12:23', 1002, '张是');
 
 -- ----------------------------
 -- Table structure for friend
@@ -143,13 +146,14 @@ CREATE TABLE `order`  (
   `realTime` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `createTime` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
   `vip` bigint(11) NOT NULL,
+  `status` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '0为未完成 1为已完成 ',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of order
 -- ----------------------------
-INSERT INTO `order` VALUES (1, 3210101, '福建省厦门市', '2022-01-06 15:41:36', 1001);
+INSERT INTO `order` VALUES (1, 3210101, '福建省厦门市', '2022-04-21 18:53:20', 1001, '0');
 
 -- ----------------------------
 -- Table structure for sys_config
@@ -199,12 +203,34 @@ INSERT INTO `user` VALUES (7, '123', '132', '2022-02-13 13:00:10', '123', '张',
 INSERT INTO `user` VALUES (8, '1234', '1234', '2022-02-13 13:00:44', '1324', '三大', '男');
 
 -- ----------------------------
+-- Table structure for venue
+-- ----------------------------
+DROP TABLE IF EXISTS `venue`;
+CREATE TABLE `venue`  (
+  `id` bigint(4) NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `image` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `startTime` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `endTime` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `createTime` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
+  `status` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '0为未预约，1为已预约',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of venue
+-- ----------------------------
+INSERT INTO `venue` VALUES (1001, '体操馆', NULL, NULL, NULL, '2022-04-22 16:03:25', '1');
+INSERT INTO `venue` VALUES (1002, '格斗场', NULL, NULL, NULL, '2022-04-22 16:03:29', '0');
+
+-- ----------------------------
 -- Table structure for vip
 -- ----------------------------
 DROP TABLE IF EXISTS `vip`;
 CREATE TABLE `vip`  (
   `id` bigint(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `image` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `sex` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `tel` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
@@ -217,10 +243,10 @@ CREATE TABLE `vip`  (
 -- ----------------------------
 -- Records of vip
 -- ----------------------------
-INSERT INTO `vip` VALUES (1001, '张三', '男', '110', '福建省厦门市', '2022-04-06 09:09:30', '18', '3501011');
-INSERT INTO `vip` VALUES (1002, '张是', '男', '120', '福建省福州市', '2022-04-06 09:09:33', '20', '3232');
-INSERT INTO `vip` VALUES (1003, '王五', '女', '110', '福建省', '2022-04-06 09:09:35', '45', '3500101');
-INSERT INTO `vip` VALUES (1004, '张二', '女', '15359887714', '1玩1', '2022-04-06 16:12:57', '23', '153453');
+INSERT INTO `vip` VALUES (1001, '张三', 'http://localhost:8082/images/3a360457-ce63-48f4-abd9-c219020864d4null-(2022-4-22).jpg', '男', '15356788812', '福建省厦门市', '2022-04-22 20:53:29', '18', '3501011');
+INSERT INTO `vip` VALUES (1002, '张是', NULL, '男', '120', '福建省福州市', '2022-04-06 09:09:33', '20', '3232');
+INSERT INTO `vip` VALUES (1003, '王五', NULL, '女', '110', '福建省', '2022-04-06 09:09:35', '45', '3500101');
+INSERT INTO `vip` VALUES (1004, '张二', NULL, '女', '15359887714', '1玩1', '2022-04-06 16:12:57', '23', '153453');
 
 -- ----------------------------
 -- View structure for host_summary
