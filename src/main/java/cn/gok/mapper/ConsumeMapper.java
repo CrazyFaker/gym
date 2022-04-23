@@ -19,4 +19,7 @@ public interface ConsumeMapper {
 
     //查询vip
     public List<Consume> listVip(Long vid);
+
+    //查询商品信息
+    public List<Consume> listCommodity(String name);
 }

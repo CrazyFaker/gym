@@ -11,6 +11,10 @@
         </if>
     </select>
 
+    <select id="listCommodity" resultType="cn.gok.entity.Consume">
+        SELECT c.*,d.sketch,d.image FROM consume c, commodity d WHERE c.name = d.cname AND c.name = #{name}
+    </select>
+
 
     <!--会员查询    -->
     <select id="listVip" resultType="cn.gok.entity.Consume">

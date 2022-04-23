@@ -1,6 +1,7 @@
 package cn.gok.service;
 
 import cn.gok.entity.Commodity;
+import cn.gok.entity.Consume;
 import com.github.pagehelper.PageInfo;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
@@ -31,4 +32,6 @@ public interface CommodityService {
 
     //更新商品数量
     public int updateNumber(Long id);
+
+
 }

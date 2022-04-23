@@ -52,5 +52,10 @@ public class FriendServiceImpl implements FriendService {
         return friendMapper.updateImage(image,id);
     }
 
+    @Override
+    public int save(Friend friend) {
+        return friendMapper.save(friend);
+    }
+
 
 }

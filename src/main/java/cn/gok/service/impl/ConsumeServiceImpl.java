@@ -118,4 +118,9 @@ public class ConsumeServiceImpl implements ConsumeService {
     public List<Consume> getconsumes() {
         return consumeMapper.getconsumes();
     }
+
+    @Override
+    public List<Consume> listCommodity(String name) {
+        return consumeMapper.listCommodity(name);
+    }
 }

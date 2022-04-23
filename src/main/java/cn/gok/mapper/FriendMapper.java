@@ -10,5 +10,6 @@ public interface FriendMapper {
 
     public int updateImage(String image,String id);
 
-    public List<Friend> listImage();
+    public int save(Friend friend);
+
 }

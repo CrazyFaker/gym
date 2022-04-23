@@ -41,9 +41,9 @@ public class ActivityController {
 
     @RequestMapping("/list_activity")
     @ResponseBody
-    public Result listActivity(@RequestParam Long vid) {
+    public Result listActivity(@RequestBody Activity activity) {
 
-        List<Activity> list = activityService.listActivity(vid);
+        List<Activity> list = activityService.listActivity(activity.getVid());
         return Result.success(list);
     }
 

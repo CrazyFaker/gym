@@ -34,6 +34,24 @@ public class FriendController {
         return Result.success(list);
     }
 
+    @RequestMapping("/add")
+    @ResponseBody
+    public Result add(@RequestBody Friend friend)  {
+
+
+        Result result = null;
+
+        int check = friendService.save(friend);
+        if (check > 0) {
+            result = Result.success(null);
+        } else {
+            result = Result.error("保存失败");
+        }
+
+        return result;
+    }
+
+
 
 
     /**

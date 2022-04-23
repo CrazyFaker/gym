@@ -20,4 +20,7 @@ public interface ConsumeService {
     public int delete(Consume consume);
 
     public List<Consume> getconsumes();//查询所有
+
+    //查询商品信息
+    public List<Consume> listCommodity(String name);
 }

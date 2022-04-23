@@ -17,4 +17,5 @@ public class Consume {
     private String sketch;
     private String remark;
     private String mention;
+    private String image;
 }
