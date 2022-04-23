@@ -7,7 +7,7 @@
 
     <!--    增-->
     <insert id="save">
-        insert into activityvip(vid,aid)
-        values (#{vid},#{aid})
+        insert into activityvip(vid,aid,remark)
+        values (#{vid},#{aid},#{remark})
     </insert>
 </mapper>

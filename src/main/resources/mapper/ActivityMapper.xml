@@ -17,7 +17,7 @@ select * from activity where is_Delete = 1
 </select>
     <!--    查询会员所购买的活动-->
     <select id="listActivity" resultType="cn.gok.entity.Activity">
-        SELECT a.* FROM activity a,activityvip v WHERE a.id = v.aid AND v.vid = #{vid}
+        SELECT a.* , v.remark FROM activity a,activityvip v WHERE a.id = v.aid AND v.vid = #{vid}
     </select>
 <!--    增-->
     <insert id="save">

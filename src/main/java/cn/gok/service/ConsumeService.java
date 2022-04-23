@@ -7,7 +7,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import java.util.List;
 
 public interface ConsumeService {
-    public PageInfo<Consume> list(String searchKey, Integer pageNum, Integer pageSize);
+    public PageInfo<Consume> list(String searchKey, String vip,Integer pageNum, Integer pageSize);
 
 
     public int save(Consume consume);

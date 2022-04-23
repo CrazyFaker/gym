@@ -11,7 +11,7 @@
  Target Server Version : 50731
  File Encoding         : 65001
 
- Date: 22/04/2022 22:22:17
+ Date: 23/04/2022 01:19:19
 */
 
 SET NAMES utf8mb4;
@@ -41,11 +41,30 @@ CREATE TABLE `activity`  (
 -- ----------------------------
 -- Records of activity
 -- ----------------------------
-INSERT INTO `activity` VALUES (1001, '动感单车', 'http://localhost:8082/images/de5a4cf7-b856-4c4e-823c-504a3eda8668null-(2022-4-22).jpg', '运动', '123', 19, 200, '2022-04-08 10:46:40', '2', '2022-04-22 22:17:44', '1003', '陈一', '0');
-INSERT INTO `activity` VALUES (1002, 'HIT燃脂', NULL, '运动', '123', 20, 200, '2022-04-07 06:01:00', '1.5', '2022-04-21 11:05:00', '1001', '李四', '0');
-INSERT INTO `activity` VALUES (1003, '太空漫步', 'http://localhost:8082/images/89b77939-1518-48f8-be27-27f54f663c0anull-(2022-4-22).jpg', '运动', '111', 20, 200, '2022-04-30 09:58:54', '1', '2022-04-22 22:16:00', '1003', '陈一', '1');
-INSERT INTO `activity` VALUES (1005, '跑步', 'http://localhost:8082/images/null-(2022-4-22).jpg', '运动', '55', 5, 50, '2022-04-30 09:59:13', '2', '2022-04-22 22:17:03', '1001', '李四', '1');
+INSERT INTO `activity` VALUES (1001, '动感单车', 'http://localhost:8082/images/de5a4cf7-b856-4c4e-823c-504a3eda8668null-(2022-4-22).jpg', '运动', '123', 19, 200, '2022-04-30 10:46:40', '2', '2022-04-23 01:12:22', '1003', '陈一', '1');
+INSERT INTO `activity` VALUES (1002, 'HIT燃脂', NULL, '运动', '123', 20, 200, '2022-04-30 06:01:00', '1.5', '2022-04-23 01:12:24', '1001', '李四', '1');
+INSERT INTO `activity` VALUES (1003, '太空漫步', 'http://localhost:8082/images/89b77939-1518-48f8-be27-27f54f663c0anull-(2022-4-22).jpg', '运动', '111', 20, 200, '2022-04-30 09:58:54', '1', '2022-04-23 00:50:37', '1003', '陈一', '1');
+INSERT INTO `activity` VALUES (1005, '跑步', 'http://localhost:8082/images/null-(2022-4-22).jpg', '运动', '55', 5, 50, '2022-04-30 09:59:13', '2', '2022-04-23 00:50:12', '1001', '李四', '1');
 INSERT INTO `activity` VALUES (1006, '跳绳', 'http://localhost:8082/images/87c88613-6200-4237-8273-4296f2db8efenull-(2022-4-22).jpg', '运动', '22', 10, 100, '2022-04-30 09:59:13', '1', '2022-04-22 21:22:57', '1004', '李青', '1');
+
+-- ----------------------------
+-- Table structure for activityvip
+-- ----------------------------
+DROP TABLE IF EXISTS `activityvip`;
+CREATE TABLE `activityvip`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `vid` bigint(20) NULL DEFAULT NULL,
+  `aid` bigint(20) NULL DEFAULT NULL,
+  `createTime` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of activityvip
+-- ----------------------------
+INSERT INTO `activityvip` VALUES (1, 1001, 1001, '2022-04-23 01:02:33');
+INSERT INTO `activityvip` VALUES (2, 1002, 1002, '2022-04-23 01:02:33');
+INSERT INTO `activityvip` VALUES (3, 1001, 1002, '2022-04-23 01:08:45');
 
 -- ----------------------------
 -- Table structure for coach
@@ -66,9 +85,9 @@ CREATE TABLE `coach`  (
 -- ----------------------------
 -- Records of coach
 -- ----------------------------
-INSERT INTO `coach` VALUES (1001, '李四', '男', '110', '强壮', '13', '18', '2022-01-06 16:19:18');
-INSERT INTO `coach` VALUES (1003, '陈一', '女', '120', '无敌', '14', '33', '2022-01-28 17:06:06');
-INSERT INTO `coach` VALUES (1004, '李青', '男', '15359881663', '强壮', NULL, '19', '2022-04-07 10:02:41');
+INSERT INTO `coach` VALUES (1001, '李四', '男', '110', '强壮', 'http://localhost:8082/images/24bfba5f-37f8-490b-b1b5-3d766f635136null-(2022-4-22).jpg', '18', '2022-01-06 16:19:18');
+INSERT INTO `coach` VALUES (1003, '陈一', '女', '120', '无敌', 'http://localhost:8082/images/79034cc7-8141-49db-beb9-1b97182343dfnull-(2022-4-22).jpg', '33', '2022-01-28 17:06:06');
+INSERT INTO `coach` VALUES (1004, '李青', '男', '15359881663', '强壮', 'http://localhost:8082/images/7962425b-0e3f-40b3-9a4c-d41302173638null-(2022-4-22).jpg', '19', '2022-04-07 10:02:41');
 
 -- ----------------------------
 -- Table structure for commodity
@@ -207,7 +226,7 @@ INSERT INTO `user` VALUES (8, '1234', '1234', '2022-02-13 13:00:44', '1324', '�
 -- ----------------------------
 DROP TABLE IF EXISTS `venue`;
 CREATE TABLE `venue`  (
-  `id` bigint(4) NOT NULL,
+  `id` bigint(4) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `image` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `startTime` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
@@ -215,13 +234,14 @@ CREATE TABLE `venue`  (
   `createTime` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
   `status` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '0为未预约，1为已预约',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1004 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of venue
 -- ----------------------------
-INSERT INTO `venue` VALUES (1001, '体操馆', NULL, NULL, NULL, '2022-04-22 16:03:25', '1');
-INSERT INTO `venue` VALUES (1002, '格斗场', NULL, NULL, NULL, '2022-04-22 16:03:29', '0');
+INSERT INTO `venue` VALUES (1001, '体操馆', 'http://localhost:8082/images/b11b8d33-0f63-40a8-b406-87e416d1bc58null-(2022-4-23).jpg', '2022-04-30 09:59:13', '2022-05-01 09:59:13', '2022-04-23 00:48:04', '1');
+INSERT INTO `venue` VALUES (1002, '格斗场', 'http://localhost:8082/images/0ca49fce-c4d3-4145-b502-eca469b12facnull-(2022-4-23).jpg', '2022-04-30 09:59:13', '2022-05-02 09:59:13', '2022-04-23 00:48:22', '0');
+INSERT INTO `venue` VALUES (1003, '溜冰场', NULL, '2022-04-27 00:00:00', '2022-04-29 00:00:00', '2022-04-23 00:38:20', '0');
 
 -- ----------------------------
 -- Table structure for vip
@@ -236,15 +256,15 @@ CREATE TABLE `vip`  (
   `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `createTime` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
   `age` varchar(2) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `identity` varchar(18) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `identity` varchar(18) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1005 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of vip
 -- ----------------------------
-INSERT INTO `vip` VALUES (1001, '张三', 'http://localhost:8082/images/3a360457-ce63-48f4-abd9-c219020864d4null-(2022-4-22).jpg', '男', '15356788812', '福建省厦门市', '2022-04-22 20:53:29', '18', '3501011');
-INSERT INTO `vip` VALUES (1002, '张是', NULL, '男', '120', '福建省福州市', '2022-04-06 09:09:33', '20', '3232');
+INSERT INTO `vip` VALUES (1001, '张三', 'http://localhost:8082/images/95c1e8ac-8482-4b42-8662-8dca27b0adcfnull-(2022-4-23).jpg', '男', '15356788812', '福建省厦门市', '2022-04-23 00:44:30', '18', '3501011');
+INSERT INTO `vip` VALUES (1002, '张是', 'http://localhost:8082/images/37960157-f9fc-41cd-a384-fa04f06754bcnull-(2022-4-22).jpg', '男', '15359881332', '福建省福州市', '2022-04-22 22:45:13', '20', '3232');
 INSERT INTO `vip` VALUES (1003, '王五', NULL, '女', '110', '福建省', '2022-04-06 09:09:35', '45', '3500101');
 INSERT INTO `vip` VALUES (1004, '张二', NULL, '女', '15359887714', '1玩1', '2022-04-06 16:12:57', '23', '153453');
 

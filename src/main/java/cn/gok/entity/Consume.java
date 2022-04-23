@@ -12,7 +12,9 @@ public class Consume {
     private Double price;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private String createTime;
-    private Long vip;
+    private String vip;
     private String vname;
     private String sketch;
+    private String remark;
+    private String mention;
 }

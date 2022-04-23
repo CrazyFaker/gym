@@ -22,16 +22,16 @@ public class ConsumeServiceImpl implements ConsumeService {
     private ConsumeMapper consumeMapper;
 
     @Override
-    public PageInfo<Consume> list(String searchKey, Integer pageNum, Integer pageSize) {
+    public PageInfo<Consume> list(String searchKey, String vip,Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum,pageSize);
-        List<Consume> list=consumeMapper.list(searchKey);
+        List<Consume> list=consumeMapper.list(searchKey,vip);
         PageInfo<Consume> pageInfo=new PageInfo<>(list);
         return pageInfo;
     }
 
     @Override
     public int save(Consume consume) {
-        if (consume.getVname() != null || consume.getVname() !="" ){
+        if (consume.getVip() != null){
             return consumeMapper.save(consume);
         }else{
             return 0;

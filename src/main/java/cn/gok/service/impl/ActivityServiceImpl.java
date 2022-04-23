@@ -74,7 +74,6 @@ public class ActivityServiceImpl implements ActivityService {
 
     @Override
     public int updateImage(String image, Long id) {
-        System.out.println(image+"-------------");
         return activityMapper.updateImage(image,id);
     }
 

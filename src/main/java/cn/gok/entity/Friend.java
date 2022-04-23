@@ -3,6 +3,7 @@ package cn.gok.entity;
 import lombok.Data;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Data
 public class Friend {
@@ -14,4 +15,5 @@ public class Friend {
     private String year;
     private String month;
     private String day;
+    private List<String> images;
 }

@@ -10,4 +10,5 @@ public class Venue {
     private String startTime;
     private String endTime;
     private String createTime;
+    private String status;
 }

@@ -5,12 +5,7 @@
 <mapper namespace="cn.gok.mapper.VenueMapper">
     <!--    查-->
     <select id="list" resultType="cn.gok.entity.Venue">
-        select * from venue where 1=1
-        <if test="searchKey !=null and searchKey !=''">
-            and `name` like CONCAT(CONCAT('%', #{searchKey}), '%')
-            or status like CONCAT(CONCAT('%', #{searchKey}), '%')
-            or startTime like CONCAT(CONCAT('%', #{searchKey}), '%')
-        </if>
+        select * from venue
     </select>
     <!--    增-->
     <insert id="save">

@@ -6,5 +6,9 @@ import java.util.List;
 
 public interface FriendMapper {
     //列表查询
-    public List<Friend> list();
+    public List<Friend> list(String searchKey);
+
+    public int updateImage(String image,String id);
+
+    public List<Friend> listImage();
 }

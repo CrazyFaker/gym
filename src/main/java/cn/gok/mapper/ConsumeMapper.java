@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ConsumeMapper {
     //列表查询
-    public List<Consume > list(String searchKey);
+    public List<Consume > list(String searchKey,String vip);
 
     //新增
     public int save(Consume consume);

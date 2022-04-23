@@ -18,7 +18,7 @@ public interface VipMapper {
     //查找名字是否相同
     public Vip findVipByName(String name) ;
 
-    public int updatePhone(String phone,Long id);
+    public int updatePhone(Vip vip);
 
     //更新图片
     public int updateImage(String image,Long id);
@@ -29,5 +29,7 @@ public interface VipMapper {
     //导入导出
     public List<Vip> getvips();//查询所有
     public Vip findById(Long id);
+
+
 }
 

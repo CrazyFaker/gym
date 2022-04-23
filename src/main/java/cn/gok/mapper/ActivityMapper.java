@@ -15,8 +15,6 @@ public interface ActivityMapper {
     //新增
     public int save(Activity activity);
 
-    //新增
-    public int saveImage(String image);
 
     public int updateImage(String image,Long id);
 

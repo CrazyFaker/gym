@@ -8,7 +8,7 @@ import java.text.ParseException;
 public interface VenueService {
 
     //列表查询
-    public PageInfo<Venue> list(String searchKey, Integer pageNum, Integer pageSize) throws ParseException;
+    public PageInfo<Venue> list(String currentTime, Integer pageNum, Integer pageSize) throws ParseException;
 
     //新增
     public int save(Venue venue);

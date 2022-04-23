@@ -76,10 +76,10 @@ public class VipController {
 
     @RequestMapping("/update_phone")
     @ResponseBody
-    public Result update(@RequestParam String phone,@RequestParam Long id){
+    public Result updatePhone(@RequestBody Vip vip){
         Result result=null;
 
-        int check = vipService.updatePhone(phone,id);
+        int check = vipService.updatePhone(vip);
         if (check > 0) {
             result = Result.success(null);
         } else {

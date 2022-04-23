@@ -12,16 +12,19 @@
 
     <!--    增-->
     <insert id="save">
-        insert into activity(activityName,`number`,type,introduction,price,startTime,duration,coachId,coachName,is_Delete)
-        values (#{activityName},#{number},#{type},#{introduction},#{price},#{startTime},#{duration},(select id from coach where `name`=#{coachName}),#{coachName},'1')
+        insert into friend(vid,value,image)
+        values (#{vid},#{value},#{image})
     </insert>
 
     <!--  编辑图片  -->
     <update id="updateImage">
-        update friend set
-            image=#{image}
-        where
-            id=#{id}
+        update friend set image=CONCAT(image,","#{image}) where id = #{id}
     </update>
+
+<!--    分割图片-->
+    <select id="listImage" resultType="cn.gok.entity.Friend">
+        select image from friend
+    </select>
+
 
 </mapper>

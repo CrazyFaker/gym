@@ -22,7 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 @Service
 public class VipServiceImpl implements VipService {
@@ -50,9 +49,7 @@ public class VipServiceImpl implements VipService {
         if(vip.getId() != null ) {
             return 0;
         }
-        if (!Pattern.matches(regex,vip.getTel())) {
-            return 0;
-        }
+
         return vipMapper.save(vip);
 
     }
@@ -239,8 +236,8 @@ public class VipServiceImpl implements VipService {
     }
 
     @Override
-    public int updatePhone(String phone, Long id) {
-        return vipMapper.updatePhone(phone,id);
+    public int updatePhone(Vip vip) {
+        return vipMapper.updatePhone(vip);
     }
 
     @Override

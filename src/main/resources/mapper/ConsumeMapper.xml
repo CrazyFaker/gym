@@ -5,13 +5,12 @@
 <mapper namespace="cn.gok.mapper.ConsumeMapper">
     <select id="list" resultType="cn.gok.entity.Consume">
         select * from consume where 1=1
-        <if test="searchKey!=null and searchKey!=''">
-            and vname like CONCAT(CONCAT('%', #{searchKey}), '%')
-            or status like CONCAT(CONCAT('%', #{searchKey}), '%')
-            or vip like CONCAT(CONCAT('%', #{searchKey}), '%')
-            or name like CONCAT(CONCAT('%', #{searchKey}), '%')
+        <if test="searchKey!=null and searchKey!='' and vip !=null and vip !=''">
+            and status =  CONCAT(CONCAT('%', #{searchKey}), '%')
+            and vip = CONCAT(CONCAT('%', #{vip}), '%')
         </if>
     </select>
+
 
     <!--会员查询    -->
     <select id="listVip" resultType="cn.gok.entity.Consume">
@@ -19,9 +18,9 @@
     </select>
     <!--   新增 -->
     <insert id="save">
-        insert into consume (name,price,number,status,vip,vname)
+        insert into consume (name,price,number,status,vip,vname,remark,mention)
         <if test="name!=null">
-            values (#{name},#{price},#{number},'1',(select id from vip where `name`=#{vname}),#{vname})
+            values (#{name},#{price},#{number},'1',#{vip},(select `name` from vip where id=#{vip}),#{remark},#{mention})
         </if>
     </insert>
 

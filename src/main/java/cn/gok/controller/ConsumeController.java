@@ -28,10 +28,11 @@ public class ConsumeController {
     @ResponseBody
     public Result list(@RequestBody JSONObject json) {
         String searchKey = json.getString("searchKey");
+        String vip = json.getString("vip");
         //给他默认的页码以及默认的每页的数目
         Integer pageNum = json.getInteger("pageNum") == null ? 1 : json.getInteger("pageNum");
         Integer pageSize = json.getInteger("pageSize") == null ? 5 : json.getInteger("pageSize");
-        PageInfo<Consume> list = consumeService.list(searchKey, pageNum, pageSize);
+        PageInfo<Consume> list = consumeService.list(searchKey,vip, pageNum, pageSize);
 
         return Result.success(list);
     }

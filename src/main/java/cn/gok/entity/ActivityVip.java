@@ -8,4 +8,5 @@ public class ActivityVip {
     private Long vid;
     private Long aid;
     private String createTime;
+    private String remark;
 }

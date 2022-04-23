@@ -7,7 +7,7 @@ import java.util.List;
 public interface VenueMapper {
 
     //列表查询
-    public List<Venue> list(String searchKey);
+    public List<Venue> list();
 
     //新增
     public int save(Venue venue);

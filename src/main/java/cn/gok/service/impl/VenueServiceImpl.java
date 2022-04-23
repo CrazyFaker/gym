@@ -19,18 +19,20 @@ public class VenueServiceImpl implements VenueService {
     @Autowired(required = false)
     private VenueMapper venueMapper;
     @Override
-    public PageInfo<Venue> list(String searchKey, Integer pageNum, Integer pageSize) throws ParseException {
+    public PageInfo<Venue> list(String currentTime, Integer pageNum, Integer pageSize) throws ParseException {
         PageHelper.startPage(pageNum,pageSize);
-        List<Venue> list=venueMapper.list(searchKey);
+        List<Venue> list=venueMapper.list();
         for( int i = 0; i < list.size() ; i++){
             String endTime=dateToStamp(list.get(i).getEndTime());
-            String currentTime = String.valueOf(System.currentTimeMillis());
+            String startTime = dateToStamp(list.get(i).getStartTime());
             int res = endTime.compareTo(currentTime);
-            if(res < 0){
-                venueMapper.updateStatus("1",list.get(i).getId());
+            int res1 = startTime.compareTo(currentTime);
+            if(res <= 0 && res1 >= 0){
+                list.get(i).setStatus("1");
+            }else{
+                list.get(i).setStatus("0");
             }
         }
-        list=venueMapper.list(searchKey);
         PageInfo<Venue> pageInfo=new PageInfo<>(list);
         return pageInfo;
     }
