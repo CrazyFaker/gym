@@ -51,6 +51,29 @@ public class FriendController {
         return result;
     }
 
+    @RequestMapping("/list_vid")
+    @ResponseBody
+    public Result listVid(@RequestBody Friend friend)  {
+        List<Friend>  list = friendService.listVid(friend);
+        return Result.success(list);
+    }
+
+    @RequestMapping("/update_status")
+    @ResponseBody
+    public Result updateStatus(@RequestBody Friend friend)  {
+
+
+        Result result = null;
+
+        int check = friendService.updateStatus(friend);
+        if (check > 0) {
+            result = Result.success(null);
+        } else {
+            result = Result.error("更新标识符失败");
+        }
+
+        return result;
+    }
 
 
 

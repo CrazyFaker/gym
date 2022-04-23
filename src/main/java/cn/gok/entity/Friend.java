@@ -16,4 +16,5 @@ public class Friend {
     private String month;
     private String day;
     private List<String> images;
+    private String status;
 }

@@ -12,9 +12,20 @@
 
     <!--    增-->
     <insert id="save">
-        insert into friend(vid,value,image)
-        values (#{vid},#{value},#{image})
+        insert into friend(vid,value,status)
+        values (#{vid},#{value},'1')
     </insert>
+
+    <!--    查-->
+    <select id="listVid" resultType="cn.gok.entity.Friend">
+        select * from friend where vid =#{vid} and status = 1
+    </select>
+
+<!--    更新标识符-->
+
+    <update id="updateStatus">
+        update friend set status =0 where id = #{id}
+    </update>
 
     <!--  编辑图片  -->
     <update id="updateImage">

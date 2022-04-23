@@ -57,5 +57,15 @@ public class FriendServiceImpl implements FriendService {
         return friendMapper.save(friend);
     }
 
+    @Override
+    public int updateStatus(Friend friend) {
+        return friendMapper.updateStatus(friend);
+    }
+
+    @Override
+    public  List<Friend>  listVid(Friend friend) {
+        return friendMapper.listVid(friend);
+    }
+
 
 }

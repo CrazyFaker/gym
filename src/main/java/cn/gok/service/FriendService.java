@@ -10,4 +10,8 @@ public interface FriendService {
     public int updateImage(String image,String id);
 
     public int save(Friend friend);
+
+    public int updateStatus(Friend friend);
+
+    public  List<Friend>  listVid(Friend friend);
 }

@@ -12,4 +12,8 @@ public interface FriendMapper {
 
     public int save(Friend friend);
 
+    public int updateStatus(Friend friend);
+
+    public List<Friend> listVid(Friend friend);
+
 }
