@@ -14,4 +14,6 @@ public interface FriendService {
     public int updateStatus(Friend friend);
 
     public  List<Friend>  listVid(Friend friend);
+
+    public int delete(Friend friend);
 }

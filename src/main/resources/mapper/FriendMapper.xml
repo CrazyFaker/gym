@@ -37,5 +37,10 @@
         select image from friend
     </select>
 
+    <!--    删-->
+    <delete id="delete">
+        delete from friend where id=#{id}
+    </delete>
+
 
 </mapper>

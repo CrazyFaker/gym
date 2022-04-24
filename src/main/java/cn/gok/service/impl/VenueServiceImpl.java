@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -23,11 +21,11 @@ public class VenueServiceImpl implements VenueService {
         PageHelper.startPage(pageNum,pageSize);
         List<Venue> list=venueMapper.list();
         for( int i = 0; i < list.size() ; i++){
-            String endTime=dateToStamp(list.get(i).getEndTime());
-            String startTime = dateToStamp(list.get(i).getStartTime());
+            String endTime=list.get(i).getEndTime();
+            String startTime = list.get(i).getStartTime();
             int res = endTime.compareTo(currentTime);
             int res1 = startTime.compareTo(currentTime);
-            if(res <= 0 && res1 >= 0){
+            if(res >= 0 && res1 <= 0){
                 list.get(i).setStatus("1");
             }else{
                 list.get(i).setStatus("0");
@@ -68,19 +66,5 @@ public class VenueServiceImpl implements VenueService {
         return venueMapper.delete(venue);
     }
 
-    /**
-     * 时间转换成时间戳,参数和返回值都是字符串
-     * @param  s
-     * @return res
-     * @throws ParseException
-     */
-    public static String dateToStamp(String s) throws ParseException {
-        String res;
-        //设置时间模版
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date = simpleDateFormat.parse(s);
-        long ts = date.getTime();
-        res = String.valueOf(ts);
-        return res;
-    }
+
 }

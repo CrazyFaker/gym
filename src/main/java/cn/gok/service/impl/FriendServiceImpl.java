@@ -67,5 +67,10 @@ public class FriendServiceImpl implements FriendService {
         return friendMapper.listVid(friend);
     }
 
+    @Override
+    public int delete(Friend friend) {
+        return friendMapper.delete(friend);
+    }
+
 
 }

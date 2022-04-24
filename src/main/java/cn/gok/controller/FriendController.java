@@ -51,6 +51,23 @@ public class FriendController {
         return result;
     }
 
+    @RequestMapping("/delete")
+    @ResponseBody
+    public Result delete(@RequestBody Friend friend)  {
+
+
+        Result result = null;
+
+        int check = friendService.delete(friend);
+        if (check > 0) {
+            result = Result.success(null);
+        } else {
+            result = Result.error("删除失败");
+        }
+
+        return result;
+    }
+
     @RequestMapping("/list_vid")
     @ResponseBody
     public Result listVid(@RequestBody Friend friend)  {

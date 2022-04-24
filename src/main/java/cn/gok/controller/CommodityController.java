@@ -135,7 +135,7 @@ public class CommodityController {
     @ResponseBody
     @RequestMapping(value ="upload", method = RequestMethod.POST)
 //    图片是以content-type为multipart/form-data的格式上传的，所以使用spring-mvc可以通过使用参数的形式以二进制的格式获取到该图片。
-    public String upload(HttpServletRequest request, @RequestParam(value = "file", required = false) MultipartFile file,@RequestBody Commodity commodity) throws IOException {
+    public String upload(HttpServletRequest request, @RequestParam(value = "file", required = false) MultipartFile file, Commodity commodity) throws IOException {
         System.out.println("执行upload");
         request.setCharacterEncoding("UTF-8");
 

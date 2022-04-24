@@ -16,4 +16,6 @@ public interface FriendMapper {
 
     public List<Friend> listVid(Friend friend);
 
+    public int delete(Friend friend);
+
 }
