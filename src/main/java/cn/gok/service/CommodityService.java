@@ -1,7 +1,6 @@
 package cn.gok.service;
 
 import cn.gok.entity.Commodity;
-import cn.gok.entity.Consume;
 import com.github.pagehelper.PageInfo;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
@@ -9,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 public interface CommodityService {
-    public PageInfo<Commodity> list(String searchKey, Integer pageNum, Integer pageSize);
+    public PageInfo<Commodity> list(String searchKey,String type, Integer pageNum, Integer pageSize);
 
 
     public int save(Commodity commodity);

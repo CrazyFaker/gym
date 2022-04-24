@@ -14,6 +14,7 @@ public class Commodity {
     private Double price;
     private Integer discount;
     private String image;
+    private String type;
 
 
 

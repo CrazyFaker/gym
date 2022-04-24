@@ -31,10 +31,11 @@ public class CommodityController {
     @ResponseBody
     public Result list(@RequestBody JSONObject json) {
         String searchKey = json.getString("searchKey");
+        String type = json.getString("type");
         //给他默认的页码以及默认的每页的数目
         Integer pageNum = json.getInteger("pageNum") == null ? 1 : json.getInteger("pageNum");
         Integer pageSize = json.getInteger("pageSize") == null ? 5 : json.getInteger("pageSize");
-        PageInfo<Commodity> list = commodityService.list(searchKey, pageNum, pageSize);
+        PageInfo<Commodity> list = commodityService.list(searchKey,type, pageNum, pageSize);
 
         return Result.success(list);
     }

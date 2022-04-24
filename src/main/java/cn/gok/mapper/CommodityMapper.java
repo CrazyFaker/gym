@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface CommodityMapper {
     //列表查询
-    public  List<Commodity> list(String searchKey);
+    public  List<Commodity> list(String searchKey,String type);
 
     //新增
     public int save(Commodity commodity);

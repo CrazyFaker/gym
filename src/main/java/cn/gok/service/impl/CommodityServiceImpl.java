@@ -28,9 +28,9 @@ public class CommodityServiceImpl implements CommodityService {
     @Autowired(required = false)
     private CommodityMapper commodityMapper;
     @Override
-    public PageInfo<Commodity> list(String searchKey, Integer pageNum, Integer pageSize) {
+    public PageInfo<Commodity> list(String searchKey, String type,Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum,pageSize);
-        List<Commodity> list=commodityMapper.list(searchKey);
+        List<Commodity> list=commodityMapper.list(searchKey,type);
         PageInfo<Commodity> pageInfo=new PageInfo<>(list);
         return pageInfo;
     }

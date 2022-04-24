@@ -5,7 +5,10 @@
 <mapper namespace="cn.gok.mapper.CommodityMapper">
     <select id="list" resultType="cn.gok.entity.Commodity">
         select * from commodity where 1=1
-        <if test="searchKey!=null and searchKey!=''">
+        <if test="type !=null and type !='' ">
+            and type =#{type}
+        </if>
+        <if test="searchKey!=null and searchKey!='' ">
             and cname like CONCAT(CONCAT('%', #{searchKey}), '%')
             or price like CONCAT(CONCAT('%', #{searchKey}), '%')
             or discount like CONCAT(CONCAT('%', #{searchKey}), '%')
